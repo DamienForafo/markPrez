@@ -1,19 +1,102 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+  import { ref } from 'vue'
+  import AddPrez from './components/addPrez.vue';
+  import Card from './components/card.vue';
+
+  const adding = ref(false);
+
+  function isAdding() {
+    adding.value = true;
+  }
+  function isNotAdding() {
+    adding.value = false;
+  }
 </script>
 
 <template>
-  <p>coucou</p>
+  <div id="topBar">
+    <p id="title">Markprez</p>
+    <div id="addButton" @click="isAdding()">
+      <p>Ajouter une présentation</p>
+    </div>
+  </div>
+  <div id="center">
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+  </div>
+  <AddPrez v-if="adding" @close="isNotAdding()" />
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  :root {
+    --topBarHeight: 60px;
+    --topBarBorderWidth: 2px;
+    --leftOrRigthSpace: 10px;
+  }
+  html {
+    height: 100%;
+  }
+  body {
+    height: 100%;
+    margin: 0;
+    background: slategray;
+  }
+  #app {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  #topBar {
+    width: 100%;
+    height: var(--topBarHeight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: darkcyan;
+    border-bottom: var(--topBarBorderWidth) solid red;
+  }
+  #addButton {
+    position: absolute;
+    left: var(--leftOrRigthSpace);
+    background: lightcoral;
+  }
+  #title {
+    background: peru;
+  }
+  #center {
+    box-sizing: border-box;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    padding: 30px;
+  }
+  @media screen and (max-width: 600px) {
+    #title {
+      position: absolute;
+      right: var(--leftOrRigthSpace);
+    }
+  }
+  @media screen and (max-width: 400px) {
+    #center {
+      padding: 10px;
+      flex-direction: column;
+      align-content: center;
+    }
+  }
 </style>
