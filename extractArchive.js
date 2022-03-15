@@ -1,23 +1,31 @@
 const AdmZip = require("adm-zip");
 const path = require("path");
 
-// 
-//
+var replaceExt = require('replace-ext');
+var fs = require('fs');
+var dir = './PROJETCODEPREZ';
 
+const electron = require('electron');
+const os = require('os');
 
 
 async function extractArchive(PATH) {
+  let tmpDir;
+  const appPrefix = 'PROJETCODEPREZ';
   try {
-    const zip = new AdmZip(PATH);
-    const outputDir = `${path.parse(PATH).name}_extracted`; //nom du dossier ou seront décompressé les fichiers
-    zip.extractAllTo(outputDir); 
 
-    console.log(`Création de ${outputDir} réussi`);
+    newPath = replaceExt(PATH, '.zip'); //rename de extension pour l'unzip
+    const zip = new AdmZip(newPath);
+
+    zip.extractAllTo(path.join(os.tmpdir(), appPrefix)); 
+    console.log(`OUI. ${path.parse(newPath).name}_extracted`);
+
 
   } catch (e) {
     console.log(`ERREUR. ${e}`);
   }
+
 }
 
 //nom du zip à extract
-extractArchive("./tagrossemere.zip");
+extractArchive("./example-presentation.zip");
