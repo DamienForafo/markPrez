@@ -11,7 +11,9 @@
   "main": "main.js",
   "dependencies": {
     "adm-zip": "^0.5.9",
-    "replace-ext": "^2.0.0",
+    "fs-extra": "^10.0.1",
+    "highlight.js": "^11.5.0",
+    "markdown-it": "^12.3.2",
     "vue": "^3.2.25"
   },
   "devDependencies": {

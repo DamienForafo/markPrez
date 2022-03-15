@@ -28,4 +28,4 @@ async function extractArchive(PATH) {
 }
 
 //nom du zip à extract
-extractArchive("./example-presentation.zip");
+//extractArchive("./example-presentation.zip");
