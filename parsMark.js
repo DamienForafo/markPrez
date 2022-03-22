@@ -1,7 +1,7 @@
 const fs = require ('fs-extra');
 const markdown = require ('./markdown.js'); 
 
-(async function convertMarkdownToHtml() {
+async function convertMarkdownToHtml() {
   console.log("Converting Markdown to HTML...");
 
   // markdown source
@@ -22,34 +22,16 @@ const markdown = require ('./markdown.js');
   </body>
   </html>`;
 
-  await fs.mkdirs("./public");
+  await fs.writeFile("./example-presentation/index.html", htmlFile, "utf8");
 
-  await fs.writeFile("./public/index.html", htmlFile, "utf8");
+  const contcss = await fs.readFile("./node_modules/highlight.js/styles/default.css", "utf8");
 
-  await fs.copy(
-    "./node_modules/highlight.js/styles/default.css",
-    "./public/default.css",
-    { overwrite: true }
-  );
+  await fs.appendFile("./example-presentation/style.css", contcss, "utf8") ;
 
   console.log("HTML generated.");
-})();
+};
 
 
 
 
 
-
-/*
-function tocHtml() {
-    if (tocHtml_) return tocHtml_;
-    const MarkdownIt = require('markdown-it');
-    const markdownIt = new MarkdownIt();
-    let md = tocMd();
-    md = md.replace(/# Table of contents/, '');
-    md = replaceGitHubByJoplinAppLinks(md);
-    tocHtml_ = markdownIt.render(md);
-    tocHtml_ = `<div id="toc">${tocHtml_}</div>`;
-    return tocHtml_;
-}
-*/
