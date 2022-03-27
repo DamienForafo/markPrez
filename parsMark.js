@@ -21,8 +21,8 @@ async function convertMarkdownToHtml() {
   ${rendered}
   </body>
   </html>`;
-
-  await fs.writeFile("./example-presentation/index.html", htmlFile, "utf8");
+ return htmlFile ;
+ //await fs.writeFile("./example-presentation/index.html", htmlFile, "utf8");
 
   const contcss = await fs.readFile("./node_modules/highlight.js/styles/default.css", "utf8");
 

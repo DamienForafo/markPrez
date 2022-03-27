@@ -10,12 +10,13 @@ const archiver = require ('archiver');
     assets: []
   });
 
-const sourceDir = './prez' ;
-const outPath = './prez.zip' ;
 
-function zipDirectory(sourceDir, outPath) {
+
+function zipDirectory(paths) {
 
   await fs.mkdirs("./prez");
+  const sourceDir = './prez' ;
+  const outPath = './prez.zip' ;
 
   foreach(file in paths)
   {
