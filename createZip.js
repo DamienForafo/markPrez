@@ -61,6 +61,7 @@ async function zipDirectory(paths) {
      )
     }
   }
+    console.log("dossier créer");
     const archive = archiver('zip', { zlib: { level: 9 }});
     const stream = fs.createWriteStream(outPath);
   
