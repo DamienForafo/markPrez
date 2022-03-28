@@ -1,10 +1,10 @@
 <script setup>
-import { ref, computed } from 'vue'
+    import { ref, computed } from 'vue';
 
 const emit = defineEmits(['close']);
 
 defineProps({
-  show: Boolean
+  
 });
 
 
@@ -55,7 +55,10 @@ function assetsChange(event) {
 }
 
 function validatePrez(event) {
-    
+    console.log('vue asking validation');
+    window.electron.validatePrez(JSON.parse(JSON.stringify(paths.value)));
+    console.log('vue asked validation');
+    emit('close');
 }
 </script>
 
@@ -71,15 +74,15 @@ function validatePrez(event) {
             <div id="closeButton" @click="() => emit('close')"></div>
             <div id="inputs">
                 <div id="mdInputDiv">
-                    <p id="mdInputText">Fichier markdown</p>
+                    <p id="mdInputText">Fichier markdown (fichier .md uniquement)</p>
                     <input id="mdInput" type="file" name="md" accept=".md" @change="mdChange"><br><br>
                 </div>
                 <div id="cssInputDiv">
-                    <p id="cssInputText">Fichier CSS</p>
+                    <p id="cssInputText">Fichier CSS (fichier .css uniquement)</p>
                     <input id="cssInput" type="file" name="css" @change="cssChange"><br><br>
                 </div>
                 <div id="configInputDiv">
-                    <p id="configInputText">Fichier JSON</p>
+                    <p id="configInputText">Fichier JSON (fichier .config uniquement)</p>
                     <input id="configInput" type="file" name="config" @change="configChange"><br><br>
                 </div>
                 <div id="envInputDiv">
@@ -92,8 +95,8 @@ function validatePrez(event) {
                 </div>
             </div>
             <div id="popupFooter">
-                <input type="submit" @click="validatePrez" :disabled="enoughFiles">
-                <p v-if="enoughFiles" id="errorMsg">Vous devez fournir au mois un fichier .md et un fichier .config</p>
+                <input type="submit" @click="validatePrez"><!--:disabled="enoughFiles"-->
+                <p v-if="!enoughFiles" id="errorMsg">Vous devez fournir au moins un fichier .md et un fichier .config</p>
             </div>
         </div>
     </div>
