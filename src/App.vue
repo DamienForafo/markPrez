@@ -1,7 +1,11 @@
 <script setup>
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
   import AddPrez from './components/addPrez.vue';
   import Card from './components/card.vue';
+  import Diapo from './components/diapo.vue';
+
+
+  const prezs = ref([]);
   
 
   const adding = ref(false);
@@ -15,13 +19,28 @@
     adding.value = false;
   }
 
+  const diapoContent = ref('');
+
+  function diapoBidon() {
+    diapoContent.value = '<h1>Une diapo bidon</h1><hr><h1>Une seconde diapo bidon</h1>';
+    fullscreenOn();
+  }
+
+  const diapoMode = computed(() => {
+      return (diapoContent.value !== '');
+  });
+
+  function quit() {
+    diapoContent.value = '';
+  }
+
   function fullscreenOn() { window.electron.fullscreenOn(); }
 
-function removePrez(event) {
-    console.log('vue asking removal');
-    window.electron.removePrez(toRemove);
-    console.log('vue asked removal');
-}
+  function removePrez(id) {
+      console.log('vue asking removal of ' + path);
+      window.electron.removePrez(path);
+      console.log('vue asked removal of ' + path);
+  }
 </script>
 
 <template>
@@ -32,20 +51,16 @@ function removePrez(event) {
     </div>
   </div>
   <div id="center">
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card id=0 title="prez" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" @click="diapoBidon" />
+    <Card id=0 title="prez" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="prez" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="prez" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="prez" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="prez" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="prez" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
   </div>
   <AddPrez v-if="adding" @close="isNotAdding" />
+  <Diapo v-if="diapoMode" :content="diapoContent" @quit="quit" />
 </template>
 
 <style>
