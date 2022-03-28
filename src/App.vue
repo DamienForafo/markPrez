@@ -2,11 +2,15 @@
   import { ref } from 'vue'
   import AddPrez from './components/addPrez.vue';
   import Card from './components/card.vue';
+// ALLER VOIR ICI : https://www.electronjs.org/fr/docs/latest/api/context-bridge
+// Faire aussi ça : https://www.codegrepper.com/code-examples/javascript/frameworks/vue/remove+file+fs
+  
 
   const adding = ref(false);
 
   function isAdding() {
     adding.value = true;
+    window.fullscreenOn();
   }
   function isNotAdding() {
     adding.value = false;
