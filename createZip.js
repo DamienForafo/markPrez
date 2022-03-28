@@ -88,3 +88,4 @@ async function zipDirectory(paths) {
       newPath = replaceExt(file, '.codeprez');
     });
   }
+module.exports = zipDirectory ;
