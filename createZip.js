@@ -2,18 +2,27 @@ const path = require('path')  ;
 const fs = require ('fs/promises') ;
 const archiver = require ('archiver');
 const replaceExt = require('replace-ext');
+const hasRead = require('haseRead.js');
+const jsonfile = require('fs-extra/lib/json');
 
 
 
 
 async function zipDirectory(paths) {
+  console.log(JSON.stringify(paths));
 
-  //await fs.mkdir("./prez");
+  if(hasRead("./prez"))
+  {
+    await fs.mkdir("./prez");
+
+  }
   const sourceDir = './prez' ;
   const outPath = './prez.zip' ;
 
   var products_file = path.basename(paths.md);
-  fs.copy(
+  fs.copyFile(paths.md, sourceDir = products_file)
+  console.log("fichie copier");
+  /*fs.copy(
     paths.md,
     sourceDir + products_file,
     { overwrite: true }
@@ -60,7 +69,7 @@ async function zipDirectory(paths) {
       { overwrite: true }
      )
     }
-  }
+  }*/
     console.log("dossier créer");
     const archive = archiver('zip', { zlib: { level: 9 }});
     const stream = fs.createWriteStream(outPath);
