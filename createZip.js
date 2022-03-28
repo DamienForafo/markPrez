@@ -1,27 +1,20 @@
-const path = require('path')  ;
-const fs = require ('fs') ;
+const path = require('path');
+const fs = require ('fs/promises');
 const archiver = require ('archiver');
 
-  const paths = ref({
-    md: '',
-    css: '',
-    config: '',
-    env: [],
-    assets: []
-  });
 
 
 
-function zipDirectory(paths) {
+async function zipDirectory(paths) {
 
-  await fs.mkdirs("./prez");
+  await fs.mkdir("./prez");
   const sourceDir = './prez' ;
   const outPath = './prez.zip' ;
 
-  foreach(file in paths)
+  for (let file in paths)
   {
     const products_file = path.basename(file);
-    fs.copy(
+    await fs.copy(
       file,
       "./prez/" + products_file,
       { overwrite: true }
@@ -44,3 +37,6 @@ function zipDirectory(paths) {
       file = file.substr(0, file.lastIndexOf(".")) + ".codeprez";
     });
   }
+
+
+  module.exports = zipDirectory;
