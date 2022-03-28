@@ -2,13 +2,20 @@ const path = require('path')  ;
 const fs = require ('fs/promises') ;
 const archiver = require ('archiver');
 const replaceExt = require('replace-ext');
+const hasRead = require('haseRead.js');
+const jsonfile = require('fs-extra/lib/json');
 
 
 
 
 async function zipDirectory(paths) {
+  console.log(JSON.stringify(paths));
+  
+  if(hasRead("./prez"))
+  {
+    await fs.mkdir("./prez");
 
-  await fs.mkdir("./prez");
+  }
   const sourceDir = './prez' ;
   const outPath = './prez.zip' ;
 
