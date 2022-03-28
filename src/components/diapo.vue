@@ -3,15 +3,15 @@ import { ref } from 'vue'
 
 
 
-defineProps({
-  
+const props = defineProps({
+  content: String
 })
 </script>
 
 
 
 <template>
-  <p>coucou</p>
+  {{props.content}}
 </template>
 
 
