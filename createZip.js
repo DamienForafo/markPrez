@@ -10,7 +10,7 @@ const jsonfile = require('fs-extra/lib/json');
 
 async function zipDirectory(paths) {
   console.log(JSON.stringify(paths));
-  
+
   if(hasRead("./prez"))
   {
     await fs.mkdir("./prez");
@@ -20,7 +20,9 @@ async function zipDirectory(paths) {
   const outPath = './prez.zip' ;
 
   var products_file = path.basename(paths.md);
-  fs.copy(
+  fs.copyFile(paths.md, sourceDir = products_file)
+  console.log("fichie copier");
+  /*fs.copy(
     paths.md,
     sourceDir + products_file,
     { overwrite: true }
@@ -67,7 +69,7 @@ async function zipDirectory(paths) {
       { overwrite: true }
      )
     }
-  }
+  }*/
     console.log("dossier créer");
     const archive = archiver('zip', { zlib: { level: 9 }});
     const stream = fs.createWriteStream(outPath);
