@@ -21,11 +21,7 @@ async function zipDirectory(paths) {
   var products_file = path.basename(paths.md);
   fs.copyFile(paths.md, sourceDir + products_file)
   console.log("fichie copier");
-  fs.copy(
-    paths.md,
-    sourceDir + products_file,
-    { overwrite: true }
-  )
+
   if (paths.css != null)
   {
 
