@@ -18,12 +18,17 @@ async function zipDirectory(paths) {
     sourceDir + products_file,
     { overwrite: true }
   )
-  products_file = path.basename(paths.css);
-  fs.copy(
-    paths.css,
-    sourceDir + products_file,
-    { overwrite: true }
-  )
+  if (paths.css != null)
+  {
+
+      products_file = path.basename(paths.css);
+      fs.copy(
+        paths.css,
+        sourceDir + products_file,
+        { overwrite: true }
+      )
+  }
+  
   products_file = path.basename(paths.config);
   fs.copy(
     paths.config,
@@ -56,8 +61,6 @@ async function zipDirectory(paths) {
      )
     }
   }
-  
-
     const archive = archiver('zip', { zlib: { level: 9 }});
     const stream = fs.createWriteStream(outPath);
   
