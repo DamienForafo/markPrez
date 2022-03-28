@@ -10,7 +10,6 @@ const jsonfile = require('fs-extra/lib/json');
 
 async function zipDirectory(paths) {
   console.log(JSON.stringify(paths));
-
   if(hasRead("./prez"))
   {
     await fs.mkdir("./prez");
@@ -22,7 +21,7 @@ async function zipDirectory(paths) {
   var products_file = path.basename(paths.md);
   fs.copyFile(paths.md, sourceDir = products_file)
   console.log("fichie copier");
-  /*fs.copy(
+  fs.copy(
     paths.md,
     sourceDir + products_file,
     { overwrite: true }
@@ -31,30 +30,21 @@ async function zipDirectory(paths) {
   {
 
       products_file = path.basename(paths.css);
-      fs.copy(
-        paths.css,
-        sourceDir + products_file,
-        { overwrite: true }
-      )
+      fs.copyFile(paths.css, sourceDir = products_file)
+
   }
   
   products_file = path.basename(paths.config);
-  fs.copy(
-    paths.config,
-    sourceDir + products_file,
-    { overwrite: true }
-  )
+  fs.copyFile(paths.config, sourceDir = products_file)
+
   
   if (paths.env != null)
   {
     for (let file of paths.env)
     {
       products_file = path.basename(file);
-     fs.copy(
-      file,
-      sourceDir + products_file,
-      { overwrite: true }
-     )
+      fs.copyFile(file, sourceDir = products_file)
+
     }
     
   }
@@ -63,13 +53,10 @@ async function zipDirectory(paths) {
     for (let file of paths.assets)
     {
       products_file = path.basename(file);
-     fs.copy(
-      file,
-      sourceDir + products_file,
-      { overwrite: true }
-     )
+      fs.copyFile(file, sourceDir = products_file)
+
     }
-  }*/
+  }
     console.log("dossier créer");
     const archive = archiver('zip', { zlib: { level: 9 }});
     const stream = fs.createWriteStream(outPath);
