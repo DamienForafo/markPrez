@@ -1,32 +1,63 @@
 const path = require('path')  ;
-const fs = require ('fs') ;
+const fs = require ('fs/promises') ;
 const archiver = require ('archiver');
-
-  const paths = ref({
-    md: '',
-    css: '',
-    config: '',
-    env: [],
-    assets: []
-  });
+const replaceExt = require('replace-ext');
 
 
 
-function zipDirectory(paths) {
 
-  await fs.mkdirs("./prez");
+async function zipDirectory(paths) {
+
+  await fs.mkdir("./prez");
   const sourceDir = './prez' ;
   const outPath = './prez.zip' ;
 
-  foreach(file in paths)
+  var products_file = path.basename(paths.md);
+  fs.copy(
+    paths.md,
+    sourceDir + products_file,
+    { overwrite: true }
+  )
+  products_file = path.basename(paths.css);
+  fs.copy(
+    paths.css,
+    sourceDir + products_file,
+    { overwrite: true }
+  )
+  products_file = path.basename(paths.config);
+  fs.copy(
+    paths.config,
+    sourceDir + products_file,
+    { overwrite: true }
+  )
+  
+  if (paths.env != null)
   {
-    const products_file = path.basename(file);
-    fs.copy(
+    for (let file of paths.env)
+    {
+      products_file = path.basename(file);
+     fs.copy(
       file,
-      "./prez/" + products_file,
+      sourceDir + products_file,
       { overwrite: true }
-    );
+     )
+    }
+    
   }
+  if (paths.assets != null)
+  {
+    for (let file of paths.assets)
+    {
+      products_file = path.basename(file);
+     fs.copy(
+      file,
+      sourceDir + products_file,
+      { overwrite: true }
+     )
+    }
+  }
+  
+
     const archive = archiver('zip', { zlib: { level: 9 }});
     const stream = fs.createWriteStream(outPath);
   
@@ -41,6 +72,8 @@ function zipDirectory(paths) {
       archive.finalize();
       console.log('archive create');
       var file = path.basename(outPath);
-      file = file.substr(0, file.lastIndexOf(".")) + ".codeprez";
+      //file = file.substr(0, file.lastIndexOf(".")) + ".codeprez";
+      newPath = replaceExt(file, '.codeprez');
     });
   }
+module.exports = zipDirectory ;

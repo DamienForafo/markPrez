@@ -2,25 +2,32 @@
   import { ref } from 'vue'
   import AddPrez from './components/addPrez.vue';
   import Card from './components/card.vue';
-// ALLER VOIR ICI : https://www.electronjs.org/fr/docs/latest/api/context-bridge
-// Faire aussi ça : https://www.codegrepper.com/code-examples/javascript/frameworks/vue/remove+file+fs
   
 
   const adding = ref(false);
 
   function isAdding() {
     adding.value = true;
-    window.fullscreenOn();
+    console.log(window);
+    console.log('isAdding !');
   }
   function isNotAdding() {
     adding.value = false;
   }
+
+  function fullscreenOn() { window.electron.fullscreenOn(); }
+
+function removePrez(event) {
+    console.log('vue asking removal');
+    window.electron.removePrez(toRemove);
+    console.log('vue asked removal');
+}
 </script>
 
 <template>
   <div id="topBar">
     <p id="title">Markprez</p>
-    <div id="addButton" @click="isAdding()">
+    <div id="addButton" @click="isAdding">
       <p>Ajouter une présentation</p>
     </div>
   </div>
@@ -38,7 +45,7 @@
     <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
     <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
   </div>
-  <AddPrez v-if="adding" @close="isNotAdding()" />
+  <AddPrez v-if="adding" @close="isNotAdding" />
 </template>
 
 <style>
