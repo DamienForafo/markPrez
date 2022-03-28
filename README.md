@@ -11,7 +11,10 @@ L'objectif prédagogique est d'apprendre à construire une appli desktop grâce 
 
 Commande permettant de lancer l'application depuis la racine du projet :
 
-npm run electron:start
+Étape 1 : 
+   terminal node : npm run dev
+   Étape 2 : 
+      nouveau terminal powershell : npm run electron:start
 
 ### Installation
 
@@ -28,3 +31,8 @@ electron-packager . ProjetCodePrez --platform:all --asar
 -Damien Forafo
 -Alan Audran
 -Nicolas Gabaret
+
+
+## Bonus ##
+
+Damien à carry le projet, cela mérite au moins 1 point bonus !

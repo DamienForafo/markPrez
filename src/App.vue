@@ -22,7 +22,7 @@
   const diapoContent = ref('');
 
   function diapoBidon() {
-    diapoContent.value = '<h1>Une diapo bidon</h1><hr><h1>Une seconde diapo bidon</h1>';
+    diapoContent.value = '<h1>Une diapo bidon</h1><hr><h1>Une seconde diapo bidon</h1><hr><h1>Une troisièem diapo bidon</h1>';
     fullscreenOn();
   }
 

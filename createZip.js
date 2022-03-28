@@ -6,8 +6,6 @@ const hasRead = require('./hasRead.js');
 const jsonfile = require('fs-extra/lib/json');
 
 
-
-
 async function zipDirectory(paths) {
   console.log(JSON.stringify(paths));
 
