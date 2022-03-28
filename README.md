@@ -11,7 +11,9 @@ L'objectif prédagogique est d'apprendre à construire une appli desktop grâce 
 
 Commande permettant de lancer l'application depuis la racine du projet :
 
-npm run electron:start
+npm run dev
+    |
+    ---->npm run electron:start
 
 ### Installation
 

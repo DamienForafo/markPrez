@@ -4,8 +4,6 @@ const archiver = require ('archiver');
 const replaceExt = require('replace-ext');
 
 
-
-
 async function zipDirectory(paths) {
 
   await fs.mkdir("./prez");
