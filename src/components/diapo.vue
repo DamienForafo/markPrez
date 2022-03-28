@@ -10,7 +10,7 @@ const props = defineProps({
 
 const page = ref(0);
 function prev() { if (page.value > 0) page.value--; }
-function next() { if (page.value < diapoContents.value.length) page.value++; }
+function next() { if (page.value < diapoContents.value.length - 1) page.value++; }
 
 
 const diapoContents = computed(() => {
