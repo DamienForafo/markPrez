@@ -1,7 +1,7 @@
-const AdmZip = require("adm-zip");
+const AdmZip = require("adm-zip"); //module pour dezip
 const path = require("path");
 
-var replaceExt = require('replace-ext');
+var replaceExt = require('replace-ext'); //module pour changer l'extension
 var fs = require('fs');
 var dir = './PROJETCODEPREZ';
 
@@ -17,7 +17,7 @@ async function extractArchive(PATH) {
     newPath = replaceExt(PATH, '.zip'); //rename de extension pour l'unzip
     const zip = new AdmZip(newPath);
 
-    zip.extractAllTo(path.join(os.tmpdir(), appPrefix)); 
+    zip.extractAllTo(path.join(os.tmpdir(), appPrefix)); //dezip du dossier dans le fichier temporaire avec pour nom PROJETCODEPREZ
     console.log(`OUI. ${path.parse(newPath).name}_extracted`);
 
 
