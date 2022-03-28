@@ -2,7 +2,7 @@ const path = require('path')  ;
 const fs = require ('fs/promises') ;
 const archiver = require ('archiver');
 const replaceExt = require('replace-ext');
-const hasRead = require('haseRead.js');
+const hasRead = require('hasRead.js');
 const jsonfile = require('fs-extra/lib/json');
 
 
