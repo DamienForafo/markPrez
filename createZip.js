@@ -1,16 +1,26 @@
 const path = require('path')  ;
 const fs = require ('fs/promises') ;
+const fsStream = fs.createWriteStream;
 const archiver = require ('archiver');
 const replaceExt = require('replace-ext');
+const hasRead = require('./hasRead.js');
+const jsonfile = require('fs-extra/lib/json');
 
 
 async function zipDirectory(paths) {
+  console.log(JSON.stringify(paths));
 
-  await fs.mkdir("./prez");
+  /*if(hasRead("./prez"))
+  {
+    await fs.mkdir("./prez");
+
+  }*/
   const sourceDir = './prez' ;
   const outPath = './prez.zip' ;
 
   var products_file = path.basename(paths.md);
+  fs.copyFile(paths.md, sourceDir + products_file)
+  console.log("fichie copier");
   fs.copy(
     paths.md,
     sourceDir + products_file,
@@ -20,30 +30,21 @@ async function zipDirectory(paths) {
   {
 
       products_file = path.basename(paths.css);
-      fs.copy(
-        paths.css,
-        sourceDir + products_file,
-        { overwrite: true }
-      )
+      fs.copyFile(paths.css, sourceDir = products_file)
+
   }
   
   products_file = path.basename(paths.config);
-  fs.copy(
-    paths.config,
-    sourceDir + products_file,
-    { overwrite: true }
-  )
+  fs.copyFile(paths.config, sourceDir = products_file)
+
   
   if (paths.env != null)
   {
     for (let file of paths.env)
     {
       products_file = path.basename(file);
-     fs.copy(
-      file,
-      sourceDir + products_file,
-      { overwrite: true }
-     )
+      fs.copyFile(file, sourceDir = products_file)
+
     }
     
   }
@@ -52,16 +53,13 @@ async function zipDirectory(paths) {
     for (let file of paths.assets)
     {
       products_file = path.basename(file);
-     fs.copy(
-      file,
-      sourceDir + products_file,
-      { overwrite: true }
-     )
+      fs.copyFile(file, sourceDir = products_file)
+
     }
   }
     console.log("dossier créer");
     const archive = archiver('zip', { zlib: { level: 9 }});
-    const stream = fs.createWriteStream(outPath);
+    const stream = fsStream(outPath);
   
     return new Promise((resolve, reject) => {
       archive
