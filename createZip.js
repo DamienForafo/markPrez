@@ -38,26 +38,33 @@ async function zipDirectory(paths) {
     sourceDir + products_file,
     { overwrite: true }
   )
-  /*
+  
   if (paths.env != null)
   {
-    products_file = path.basename(paths.env);
-    fs.copy(
-      paths.config,
+    for (let file of paths.env)
+    {
+      products_file = path.basename(file);
+     fs.copy(
+      file,
       sourceDir + products_file,
       { overwrite: true }
-    )
+     )
+    }
+    
   }
   if (paths.assets != null)
   {
-    products_file = path.basename(paths.assets);
-    fs.copy(
-      paths.config,
+    for (let file of paths.assets)
+    {
+      products_file = path.basename(file);
+     fs.copy(
+      file,
       sourceDir + products_file,
       { overwrite: true }
-    )
+     )
+    }
   }
-  */
+  
 
 /*
   foreach(file in paths)
