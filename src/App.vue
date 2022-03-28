@@ -2,6 +2,9 @@
   import { ref } from 'vue'
   import AddPrez from './components/addPrez.vue';
   import Card from './components/card.vue';
+
+
+  const prezs = ref([]);
   
 
   const adding = ref(false);
@@ -17,11 +20,11 @@
 
   function fullscreenOn() { window.electron.fullscreenOn(); }
 
-function removePrez(event) {
-    console.log('vue asking removal');
-    window.electron.removePrez(toRemove);
-    console.log('vue asked removal');
-}
+  function removePrez(id) {
+      console.log('vue asking removal of ' + path);
+      window.electron.removePrez(path);
+      console.log('vue asked removal of ' + path);
+  }
 </script>
 
 <template>
@@ -32,18 +35,13 @@ function removePrez(event) {
     </div>
   </div>
   <div id="center">
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
-    <Card title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" />
+    <Card id=0 title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
+    <Card id=0 title="ballec" description="nimp" duration="3 min" authors="nimportequi, qqun" @delete="() => removePrez()" />
   </div>
   <AddPrez v-if="adding" @close="isNotAdding" />
 </template>

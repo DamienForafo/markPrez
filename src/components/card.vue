@@ -3,12 +3,14 @@
 
 
     const props = defineProps({
+        id: Number,
         title: String,
         description: String,
         duration: String,
         authors: String
     });
-
+    
+    const emit = defineEmits(['delete']);
 
     const detailed = ref(false);
 
@@ -24,7 +26,7 @@
 <template>
   <div id="card" @mouseenter="isDetailed()" @mouseleave="isNotDetailed()" :detailed="detailed">
       <p id="prezTitle">{{title}}</p>
-      <div id="delete"></div>
+      <div id="delete" @click="() => emit('delete')"></div>
       <p id="description">{{description}}</p>
       <p id="duration">{{duration}}</p>
       <p id="authors">{{authors}}</p>
