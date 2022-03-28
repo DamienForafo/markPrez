@@ -1,6 +1,5 @@
 const path = require('path')  ;
-const fs = require ('fs/promises') ;
-const fsStream = fs.createWriteStream;
+const fs = require ('fs') ;
 const archiver = require ('archiver');
 const replaceExt = require('replace-ext');
 const hasRead = require('./hasRead.js');
@@ -12,11 +11,12 @@ const jsonfile = require('fs-extra/lib/json');
 async function zipDirectory(paths) {
   console.log(JSON.stringify(paths));
 
-  /*if(hasRead("./prez"))
+  f(hasRead("./prez"))
   {
     await fs.mkdir("./prez");
 
-  }*/
+  }
+
   const sourceDir = './prez' ;
   const outPath = './prez.zip' ;
 
@@ -28,12 +28,12 @@ async function zipDirectory(paths) {
   {
 
       products_file = path.basename(paths.css);
-      fs.copyFile(paths.css, sourceDir = products_file)
+      fs.copyFile(paths.css, sourceDir + products_file)
 
   }
   
   products_file = path.basename(paths.config);
-  fs.copyFile(paths.config, sourceDir = products_file)
+  fs.copyFile(paths.config, sourceDir + products_file)
 
   
   if (paths.env != null)
@@ -41,7 +41,7 @@ async function zipDirectory(paths) {
     for (let file of paths.env)
     {
       products_file = path.basename(file);
-      fs.copyFile(file, sourceDir = products_file)
+      fs.copyFile(file, sourceDir + products_file)
 
     }
     
@@ -55,9 +55,10 @@ async function zipDirectory(paths) {
 
     }
   }
+
     console.log("dossier créer");
     const archive = archiver('zip', { zlib: { level: 9 }});
-    const stream = fsStream(outPath);
+    const stream = fs.createWriteStream(outPath);
   
     return new Promise((resolve, reject) => {
       archive
