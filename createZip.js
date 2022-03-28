@@ -8,7 +8,7 @@ const replaceExt = require('replace-ext');
 
 async function zipDirectory(paths) {
 
-  await fs.mkdir("./prez");
+  //await fs.mkdir("./prez");
   const sourceDir = './prez' ;
   const outPath = './prez.zip' ;
 
